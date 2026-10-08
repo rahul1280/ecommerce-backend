@@ -86,7 +86,7 @@ const uploadProductImage = [handleUpload('image', 5), verifyImageContent];
 
 // Only admins may attach product images (moderators can still edit the text fields)
 const adminOnlyImage = (req, res, next) => {
-  if (req.file && req.user.role !== 'admin') {
+  if (req.file && req.user.role !== 'admin' && req.user.role !== 'moderator') {
     return next(createError('Only admins can upload product images', 403));
   }
   next();
